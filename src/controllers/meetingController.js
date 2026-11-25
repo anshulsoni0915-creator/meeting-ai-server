@@ -1,5 +1,5 @@
-ï»¿import { processMeetingAudio, answerMeetingQuestion } from "../services/transcriptionService.js";
-import Meeting from "../models/Meeting.js";
+import { processMeetingAudio, answerMeetingQuestion } from "../services/transcriptionService.js";
+import Meeting from "../models/meeting.js";
 import PDFDocument from "pdfkit";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 import fs from "fs";
@@ -163,13 +163,13 @@ export const exportMeetingPdf = async (req, res) => {
 
     doc.fontSize(14).text("Key Discussion Points");
     (meeting.summary?.keyPoints || []).forEach((pt) => {
-      doc.fontSize(11).text(`â€¢ ${pt}`);
+      doc.fontSize(11).text(`• ${pt}`);
     });
     doc.moveDown();
 
     doc.fontSize(14).text("Action Items");
     (meeting.summary?.actionItems || []).forEach((item) => {
-      doc.fontSize(11).text(`â€¢ [${item.owner}] ${item.task}`);
+      doc.fontSize(11).text(`• [${item.owner}] ${item.task}`);
     });
     doc.moveDown();
 
